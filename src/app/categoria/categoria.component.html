@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Agregar Categoría</h4>
+              <form>
+
+                  <div class="form-group">
+                      <label>Nombre de categoría</label>
+                      <input type="text" class="form-control" placeholder="Nombre" name="nombre" id="categoria-nombre" [(ngModel)]="name" (ngModelChange)="changeCategoria()">
+                  </div>
+
+                  <div class="form-group">
+                      <label>Descripción</label>
+                      <input type="text" maxlength="50" class="form-control" placeholder="Descripción" name="descripcion" id="categoria-descripcion" [(ngModel)]="description" (ngModelChange)="changeCategoria()">
+                  </div>
+                  
+                  <hr>
+                  <button (click)="saveCategoriaPersonalizada()" type="button" class="btn btn-success mr-2">
+              <i class="fa fa-save"></i>
+              Agregar
+            </button>
+
+                  <!-- 
+              <button disabled class="btn btn-success mr-2">
+                <i class="fa fa-spin fa-sync"></i>
+                Espere por favor...
+              </button> 
+            -->
+
+                  <button type="reset" class="btn btn-light">Cancelar</button>
+
+              </form>
+              <hr>
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let categoria of categorias">
+                        <td>{{categoria.name}}</td>
+                        <td>{{categoria.description}}</td>
+                        <td>Modificar</td>
+                        <td>Eliminar</td>
+                     </tr>
+                </tbody>
+
+            </table>
+          </div>
+      </div>
+  </div>
+</div>
