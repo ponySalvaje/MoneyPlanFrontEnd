@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriapredefinidaAPIService } from '../services/categoriapredefinida-api.service';
 import { TransaccionAPIService } from '../services/transaccion-api.service';
+import { CategoriapersonalizadaAPIService } from '../services/categoriapersonalizada-api.service';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -10,7 +11,7 @@ import { TransaccionAPIService } from '../services/transaccion-api.service';
 export class IngresoEgresoComponent implements OnInit {
 
   public transactionType = [];
-  public cliente = {};
+  public cliente;
   private description = '';
   private amount = 0.00;
   private categoria = 0;
@@ -20,20 +21,23 @@ export class IngresoEgresoComponent implements OnInit {
   private categoriaObject = {};
 
   private categoriasPredefinidas = {};
+  private categoriasPersonalizadas = {};
 
   private categorias = [];
   private transacciones = [];
 
   constructor(
     private categoriaPredefinida: CategoriapredefinidaAPIService,
-    private transaccion: TransaccionAPIService) {
+    private transaccion: TransaccionAPIService,
+    private categoriaPersonalizada: CategoriapersonalizadaAPIService) {
     
    }
 
   ngOnInit() {
     this.getLocalStorage();
-    this.getListaCategorias();
     this.getCliente();
+    this.getListaCategoriasPredefinidas();
+    this.getListaCategoriasPersonalizadas();
     this.getTipos();
   }
 
@@ -44,9 +48,20 @@ export class IngresoEgresoComponent implements OnInit {
     this.transactionType.push(`Gasto recurrente mensual`);
   }
 
-  getListaCategorias() {
+  getListaCategoriasPersonalizadas() {
     const _this = this;
     _this.categorias.push('');
+    this.categoriaPersonalizada.getCategoriaPersonalizadaPorCliente(this.cliente.id)
+   .subscribe(categoriasPersonalizadas => {
+      _this.categoriasPersonalizadas = JSON.parse(JSON.stringify(categoriasPersonalizadas));
+      for (let i in _this.categoriasPersonalizadas) {
+        _this.categorias.push(_this.categoriasPersonalizadas[i]);
+      }
+   });
+  }
+
+  getListaCategoriasPredefinidas() {
+    const _this = this;
     this.categoriaPredefinida.getAllCategoriaspredefinidas()
    .subscribe(categoriasPredefinidas => {
       _this.categoriasPredefinidas = JSON.parse(JSON.stringify(categoriasPredefinidas));
@@ -85,10 +100,10 @@ export class IngresoEgresoComponent implements OnInit {
   saveTransaccion() {
     this.setTransactionType(this.tipo);
     let transaccion = {
-      cliente: this.cliente,
+      client: this.cliente,
       description: this.description,
       amount: this.amount,
-      categoriaPredefinida: this.categorias[this.categoria],
+      defaultCategory: this.categorias[this.categoria],
       transactionType: this.tipoTransaccion,
       timestamp: new Date().toISOString()
     }

@@ -14,7 +14,7 @@ export class CategoriaComponent implements OnInit {
 
   private categorias = [];
 
-  private cliente;
+  private client;
 
   private categoriasPersonalizadas;
 
@@ -22,7 +22,7 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit() {
     this.getLocalStorage();
-    this.getCliente();
+    this.getClient();
     this.getCategoriaPersonalizadaPorCliente();
   }
 
@@ -30,8 +30,8 @@ export class CategoriaComponent implements OnInit {
     this.saveLocalStorage();
   }
 
-  getCliente() {
-    let cliente = {
+  getClient() {
+    let client = {
       docId: "71653252",
       docIdType: "DNI",
       email: "marcesftwr2@gmail.com",
@@ -39,15 +39,14 @@ export class CategoriaComponent implements OnInit {
       name: "Marcelo",
       phoneNumber: "956868516"
     }
-    this.cliente = cliente;
+    this.client = client;
   }
 
   getCategoriaPersonalizadaPorCliente() {
     const _this = this;
-    this.categoriaPersonalizada.getCategoriaPersonalizadaPorCliente(this.cliente.id)
+    this.categoriaPersonalizada.getCategoriaPersonalizadaPorCliente(this.client.id)
     .subscribe(categoriasPersonalizada => { 
       _this.categoriasPersonalizadas = JSON.parse(JSON.stringify(categoriasPersonalizada));
-      console.log(categoriasPersonalizada);
       for (let i in _this.categoriasPersonalizadas) {
         _this.categorias.push(_this.categoriasPersonalizadas[i]);
       }
@@ -56,7 +55,7 @@ export class CategoriaComponent implements OnInit {
 
   saveCategoriaPersonalizada() {
     let categoriaPersonalizada = {
-      cliente: this.cliente,
+      client: this.client,
       description: this.description,
       name: this.name,
     }
@@ -66,6 +65,10 @@ export class CategoriaComponent implements OnInit {
       this.description = '';
       this.name = '';
       this.saveLocalStorage();
+
+      //volver a cargar categorias
+      this.categorias = [];
+      this.ngOnInit();
     })
   }
 

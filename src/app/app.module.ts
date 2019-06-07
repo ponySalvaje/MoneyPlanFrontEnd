@@ -28,6 +28,7 @@ import { ClienteAPIService } from './services/cliente-api.service';
 import { MetaahorroAPIService } from './services/metaahorro-api.service';
 import { RecompensaAPIService } from './services/recompensa-api.service';
 import { TransaccionAPIService } from './services/transaccion-api.service';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TransaccionAPIService } from './services/transaccion-api.service';
     NavbarComponent,
     SidebarComponent,
     CategoriaComponent,
-    TwoDigitDecimalNumberDirective
+    TwoDigitDecimalNumberDirective,
+    ConfiguracionComponent
   ],
   imports: [
     BrowserModule,

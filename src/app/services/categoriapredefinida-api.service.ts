@@ -9,9 +9,14 @@ export class CategoriapredefinidaAPIService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCategoriaspredefinidas() {
-    const url_api = 'http://localhost:8070/api/categoriaPredefinida/';
+  headers : HttpHeaders = new HttpHeaders({
+    "Content-Type": "application/json",
+    "Authorization": "Basic bWFyY2VzZnR3cjJAZ21haWwuY29tOndlbGNvbWUx"
+  })
 
-    return this.http.get(url_api);
+  getAllCategoriaspredefinidas() {
+    const url_api = 'http://localhost:8070/api/defaultCategory/';
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
   }
 }
