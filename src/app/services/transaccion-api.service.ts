@@ -9,12 +9,12 @@ import { map } from 'rxjs/operators';
 export class TransaccionAPIService {
   transaccion: Observable<any>;
 
-  constructor(private http: HttpClient) { }
 
   headers : HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json",
-    "Authorization": "Basic bWFyY2VzZnR3cjJAZ21haWwuY29tOndlbGNvbWUx"
+    "Authorization": "Basic "+localStorage.getItem("currentUser")
   })
+  constructor(private http: HttpClient) { }
 
   getAllTransaccionsFromClient(clientId) {
     const url_api = `http://localhost:8070/api/transaction/client/${clientId}`;

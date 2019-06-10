@@ -8,11 +8,12 @@ import { map } from 'rxjs/operators';
 })
 export class MetaahorroAPIService {
 
-  constructor(private http: HttpClient) { }
 
   headers : HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json",
+    "Authorization": "Basic "+localStorage.getItem("currentUser")
   })
+  constructor(private http: HttpClient) { }
 
   getAhorroPorCliente(clientId) {
     const url_api = `http://localhost:8070/api/savingGoal/client/${clientId}`;

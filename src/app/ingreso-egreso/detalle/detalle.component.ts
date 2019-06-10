@@ -25,7 +25,7 @@ export class DetalleComponent implements OnInit {
       docId: "71653252",
       docIdType: "DNI",
       email: "marcesftwr2@gmail.com",
-      id: 1,
+      id: 2,
       name: "Marcelo",
       phoneNumber: "956868516"
     }

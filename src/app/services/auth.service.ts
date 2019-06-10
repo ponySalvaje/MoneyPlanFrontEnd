@@ -13,18 +13,16 @@ export class AuthService {
   private key = '';
 
   private userSec;
-  
-  //"Authorization": "Basic " + btoa(userSec.username+":"+userSec.password)
 
-  headers : HttpHeaders = new HttpHeaders({
-    "Content-Type": "application/json",
-    "Authorization": "Basic "+this.key
-  })
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + this.key
+  });
 
   constructor(private http: HttpClient) { }
 
   generateKey(userSec) {
-    this.key = btoa(userSec.username+":"+userSec.password);
+    this.key = btoa(userSec.username + ':' + userSec.password);
   }
 
   login(userSec) {
@@ -35,9 +33,13 @@ export class AuthService {
     return this.http.post(url_api, this.userSec, {headers: this.headers, withCredentials: true})
     .pipe(map(result => {
       if (result = 'OK') {
-        localStorage.setItem('currentUser', JSON.stringify(this.key));
+        localStorage.setItem('currentUser', this.key);
       }
-    }));
+      if (result !== 'OK') {
+        localStorage.clear();
+      }
+    }
+    ));
   }
 
   logout() {

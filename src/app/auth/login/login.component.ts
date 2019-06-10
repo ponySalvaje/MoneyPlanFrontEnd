@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { ClienteAPIService } from 'src/app/services/cliente-api.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private clientService: ClienteAPIService) { }
   private id = 0;
 
   private username;
@@ -21,16 +23,24 @@ export class LoginComponent implements OnInit {
   }
 
   authenticateUser() {
-    let userSec = {
+    const userSec = {
       id: this.id,
       username: this.username,
       password: this.password
-    }
+    };
+    let clientId;
     this.userSec = userSec;
 
-    this.AuthService.login(this.userSec)
-    .subscribe(result => { 
-      console.log(result);
-    })
+    this.authService.login(this.userSec)
+    .subscribe(result => {
+      if (localStorage.getItem('clientId') !== null) {
+        this.router.navigateByUrl('/');
+      }
+    });
+    this.clientService.getInfo(this.userSec.username)
+    .subscribe(result => {
+      clientId = result;
+      localStorage.setItem('clientId', clientId);
+    });
   }
 }
