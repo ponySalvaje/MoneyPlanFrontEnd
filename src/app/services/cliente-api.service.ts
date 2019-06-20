@@ -14,7 +14,7 @@ export class ClienteAPIService {
     'Authorization': 'Basic ' + localStorage.getItem('currentUser')
   });
   getInfo(username) {
-    const url_api = 'http://localhost:8070/api/client/user/' + username;
+    const url_api = 'http://localhost:8070/api/client/user/' + btoa(username);
     return this.http.get(url_api, {headers: this.headers, withCredentials: true});
   }
 }

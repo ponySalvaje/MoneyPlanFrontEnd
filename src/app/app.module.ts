@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // Módulos
 import { AppRoutingModule } from './app-routing.module';
@@ -52,7 +54,8 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
     FormsModule,
     HttpClientModule
   ],
-  providers: [CategoriapersonalizadaAPIService, CategoriapredefinidaAPIService, ClienteAPIService, MetaahorroAPIService, RecompensaAPIService, TransaccionAPIService],
+  providers: [CategoriapersonalizadaAPIService, CategoriapredefinidaAPIService, ClienteAPIService, 
+    MetaahorroAPIService, RecompensaAPIService, TransaccionAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ClienteAPIService } from 'src/app/services/cliente-api.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,14 +35,22 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.userSec)
     .subscribe(result => {
-      if (localStorage.getItem('clientId') !== null) {
-        this.router.navigateByUrl('/');
+      this.router.navigate(['']);
+    }, error => {
+      if (error.status == 401) {
+        Swal.fire({
+          type: 'error',
+          title: 'Lo sentimos...',
+          text: 'Usuario y contraseña incorrectos!'
+        });
       }
     });
+    /*
     this.clientService.getInfo(this.userSec.username)
     .subscribe(result => {
       clientId = result;
       localStorage.setItem('clientId', clientId);
     });
+    */
   }
 }

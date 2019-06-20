@@ -37,12 +37,13 @@ export class CategoriaComponent implements OnInit {
       docId: '71653252',
       docIdType: 'DNI',
       email: 'marcesftwr2@gmail.com',
-      id: 2,
+      id: 1,
       name: 'Marcelo',
       phoneNumber: '956868516'
     };
     this.client = client;
-    this.clientId = localStorage.getItem('clientId');
+    this.clientId = client.id;
+    //this.clientId = localStorage.getItem('clientId');
   }
 
   getCategoriaPersonalizadaPorCliente() {
@@ -52,6 +53,8 @@ export class CategoriaComponent implements OnInit {
       for (const i in this.categoriasPersonalizadas) {
         this.categorias.push(this.categoriasPersonalizadas[i]);
       }
+    }, err => {
+      console.log(err);
     });
   }
 

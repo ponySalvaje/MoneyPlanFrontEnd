@@ -14,23 +14,39 @@ export class AuthService {
 
   private userSec;
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + this.key
-  });
+  private body;
 
   constructor(private http: HttpClient) { }
 
-  generateKey(userSec) {
+  generateKey(userSec: { username: string; password: string; }) {
     this.key = btoa(userSec.username + ':' + userSec.password);
   }
 
+  generateBody(userSec: { password: string; username: string; }) {
+    const body = {
+      password: btoa(userSec.password),
+      username: btoa(userSec.username)
+    }
+    this.body = JSON.parse(JSON.stringify(body));
+  }
+
   login(userSec) {
-    const url_api = 'http://localhost:8070/api/client/login';
 
     this.userSec = userSec;
+
     this.generateKey(this.userSec);
-    return this.http.post(url_api, this.userSec, {headers: this.headers, withCredentials: true})
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + this.key
+      })
+    };
+
+    const url_api = 'http://localhost:8070/api/client/login/';
+    
+    this.generateBody(this.userSec);
+    return this.http.post(url_api, this.body, httpOptions)
     .pipe(map(result => {
       if (result = 'OK') {
         localStorage.setItem('currentUser', this.key);

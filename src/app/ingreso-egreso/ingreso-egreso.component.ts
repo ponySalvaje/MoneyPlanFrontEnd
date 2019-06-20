@@ -30,7 +30,6 @@ export class IngresoEgresoComponent implements OnInit {
     private categoriaPredefinida: CategoriapredefinidaAPIService,
     private transaccion: TransaccionAPIService,
     private categoriaPersonalizada: CategoriapersonalizadaAPIService) {
-    
    }
 
   ngOnInit() {
@@ -54,6 +53,7 @@ export class IngresoEgresoComponent implements OnInit {
     this.categoriaPersonalizada.getCategoriaPersonalizadaPorCliente(this.cliente.id)
    .subscribe(categoriasPersonalizadas => {
       _this.categoriasPersonalizadas = JSON.parse(JSON.stringify(categoriasPersonalizadas));
+// tslint:disable-next-line: forin
       for (let i in _this.categoriasPersonalizadas) {
         _this.categorias.push(_this.categoriasPersonalizadas[i]);
       }
@@ -88,8 +88,8 @@ export class IngresoEgresoComponent implements OnInit {
   }
 
   setTransactionType(tipo) {
-    var valor:string = tipo;
-    switch(valor) {
+    var valor: string = tipo;
+    switch (valor) {
       case "Ingreso": { this.tipoTransaccion = 1; break; }
       case "Egreso": { this.tipoTransaccion = 2; break; }
       case "Gasto recurrente mensual": { this.tipoTransaccion = 3; break; }
