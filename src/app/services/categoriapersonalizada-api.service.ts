@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/observable';
 import { map } from 'rxjs/operators';
+import {AppConstants} from '../AppConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,11 @@ import { map } from 'rxjs/operators';
 export class CategoriapersonalizadaAPIService {
   transaccion: Observable<any>;
 
-  constructor(private http: HttpClient) { }
+  _baseURL : string;
+
+  constructor(private http: HttpClient) {
+    this._baseURL = AppConstants.baseURL;
+   }
 
   getCategoriaPersonalizadaPorCliente(clientId) {
 
@@ -20,7 +25,7 @@ export class CategoriapersonalizadaAPIService {
       })
     };
 
-    const url_api = `http://localhost:8070/api/customCategory/client/${clientId}`;
+    const url_api = this._baseURL + `/customCategory/client/${clientId}`;
 
     return this.http.get(url_api, httpOptions);
   }
@@ -34,7 +39,7 @@ export class CategoriapersonalizadaAPIService {
       })
     };
 
-    const url_api = 'http://localhost:8070/api/customCategory/';
+    const url_api = this._baseURL + '/customCategory/';
 
     return this.http.post(url_api, categoriaPersonalizada, httpOptions)
     .pipe(map(data => data));

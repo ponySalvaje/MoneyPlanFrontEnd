@@ -6,28 +6,68 @@
                 <div class="auto-form-wrapper">
                     <form action="#">
                         <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Nombre" name="name" [(ngModel)]="name">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="form-group">
                             <div class="input-group">
-                                <input type="email" class="form-control" placeholder="Correo">
+                                <input type="text" class="form-control" placeholder="Tipo de Documento" name="docIdType" [(ngModel)]="docIdType">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
-                      <i class="fa fa-check-circle"></i>
-                    </span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Número de Documento" name="docId" [(ngModel)]="docId">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="form-group">
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="text" class="form-control" placeholder="Teléfono" name="phoneNumber" [(ngModel)]="phoneNumber">
                                 <div class="input-group-append">
                                     <span class="input-group-text">
-                      <i class="fa fa-check-circle"></i>
-                    </span>
+                                        <i class="fa fa-check-circle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Correo" name="email" [(ngModel)]="email">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder="Contraseña" name="password" [(ngModel)]="password">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-check-circle"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary submit-btn btn-block">Crear cuenta</button>
+                            <button (click)="registerUser()" class="btn btn-primary submit-btn btn-block">Crear cuenta</button>
                         </div>
                         <div class="text-block text-center my-3">
                             <span class="text-small font-weight-semibold">¿Ya tienes una cuenta?</span>

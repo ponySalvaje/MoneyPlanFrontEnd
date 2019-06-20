@@ -23,7 +23,7 @@ import { TwoDigitDecimalNumberDirective } from './two-digits-number-validation.d
 
 import { HttpClientModule } from '@angular/common/http';
 
-//Services
+// Services
 import { CategoriapersonalizadaAPIService } from './services/categoriapersonalizada-api.service';
 import { CategoriapredefinidaAPIService } from './services/categoriapredefinida-api.service';
 import { ClienteAPIService } from './services/cliente-api.service';

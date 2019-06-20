@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           type: 'error',
           title: 'Lo sentimos...',
-          text: 'Usuario y contraseña incorrectos!'
+          text: '¡Usuario y contraseña incorrectos!'
         });
       }
     });
