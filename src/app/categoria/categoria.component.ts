@@ -58,6 +58,17 @@ export class CategoriaComponent implements OnInit {
     });
   }
 
+  deleteCategoria(categoriaId) {
+    this.categoriaPersonalizada.deleteCategoriapredefinida(categoriaId)
+    .subscribe(result => {
+      // volver a cargar categorias
+      this.categorias = [];
+      this.ngOnInit();
+    }, err => {
+      console.log(err);
+    })
+  }
+
   saveCategoriaPersonalizada() {
     const categoriaPersonalizada = {
       client: this.client,

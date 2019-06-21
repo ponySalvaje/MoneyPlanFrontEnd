@@ -19,7 +19,7 @@ export class CategoriapredefinidaAPIService {
    }
 
   getAllCategoriaspredefinidas() {
-    const url_api = this._baseURL + '/api/defaultCategory/';
+    const url_api = this._baseURL + '/defaultCategory/';
 
     return this.http.get(url_api, {headers: this.headers, withCredentials: true});
   }

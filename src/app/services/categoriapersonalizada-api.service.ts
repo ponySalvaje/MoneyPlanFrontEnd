@@ -30,6 +30,20 @@ export class CategoriapersonalizadaAPIService {
     return this.http.get(url_api, httpOptions);
   }
 
+  deleteCategoriapredefinida(categoryId) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + localStorage.getItem('currentUser')
+      })
+    };
+
+    const url_api = this._baseURL + `/customCategory/${categoryId}`;
+
+    return this.http.delete(url_api, httpOptions);
+  }
+
   saveCategoriaPersonalizada(categoriaPersonalizada) {
 
     const httpOptions = {

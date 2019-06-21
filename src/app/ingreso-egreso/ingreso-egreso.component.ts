@@ -100,10 +100,10 @@ export class IngresoEgresoComponent implements OnInit {
   saveTransaccion() {
     this.setTransactionType(this.tipo);
     let transaccion = {
-      client: this.cliente,
+      clientId: this.cliente.id,
       description: this.description,
       amount: this.amount,
-      defaultCategory: this.categorias[this.categoria],
+      categoryName: this.categoria,
       transactionType: this.tipoTransaccion,
       timestamp: new Date().toISOString()
     }

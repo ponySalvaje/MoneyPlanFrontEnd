@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label>Categoria</label>
                         <select type="text" maxlength="50" class="form-control" placeholder="Categoría" name="categoria" id="transaccion-categoria" [(ngModel)]="categoria" (ngModelChange)="changeTransaction()">
-                            <option *ngFor="let categoria of categorias;" value="{{categoria.id}}">{{ categoria.name }}</option>
+                            <option *ngFor="let categoria of categorias;" value="{{categoria.name}}">{{ categoria.name }}</option>
                         </select>
                     </div>
 
