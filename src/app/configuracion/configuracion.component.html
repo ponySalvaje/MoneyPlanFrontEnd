@@ -12,7 +12,17 @@
 
                   <div class="form-group">
                     <label>Descripción</label>
-                    <input type="text" maxlength="50" class="form-control" placeholder="Descripción" name="descripcion" id="ahorro_descripcion" [(ngModel)]="ahorro_description" (ngModelChange)="changeAhorro()">
+                    <input type="text" maxlength="50" class="form-control" placeholder="Descripción" name="descripcion" id="ahorro_descripcion" [(ngModel)]="ahorro_descripcion" (ngModelChange)="changeAhorro()">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Fecha de Inicio</label>
+                    <input type="date" maxlength="50" class="form-control" placeholder="Fecha de Inicio" name="fecha_inicio" id="ahorro_fecha_inicio" [(ngModel)]="ahorro_fecha_inicio" (ngModelChange)="changeAhorro()">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Fecha de Fin</label>
+                    <input type="date" maxlength="50" class="form-control" placeholder="Fecha de Fin" name="fecha_fin" id="ahorro_fecha_fin" [(ngModel)]="ahorro_fecha_fin" (ngModelChange)="changeAhorro()">
                   </div>
                   
                   <hr>
@@ -35,19 +45,19 @@
               <table class="table">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>Monto</th>
                         <th>Descripción</th>
-                        <th>Modificar</th>
-                        <th>Eliminar</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Fin</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let meta of metas">
-                        <td>{{categoria.name}}</td>
-                        <td>{{categoria.description}}</td>
-                        <td>Modificar</td>
-                        <td>Eliminar</td>
+                        <td>{{meta.amount}}</td>
+                        <td>{{meta.description}}</td>
+                        <td>{{meta.startDate | date : 'dd-MM-yyyy'}}</td>
+                        <td>{{meta.expirationDate | date : 'dd-MM-yyyy'}}</td>
                      </tr>
                 </tbody>
 

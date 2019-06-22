@@ -15,9 +15,13 @@ export class DetalleComponent implements OnInit {
   private transacciones = {};
   private cliente;
 
+  public subscripciones_clientes = [];
+  private subscripciones = {};
+
   ngOnInit() {
     this.getCliente();
     this.getListaTransacciones();
+    this.getListaSubscripciones();
   }
 
   getCliente() {
@@ -51,6 +55,30 @@ export class DetalleComponent implements OnInit {
         _this.transacciones_clientes.push(_this.transacciones[i]);
       }
    });
+  }
+
+  getListaSubscripciones() {
+    const _this = this;
+    this.transaccion.getAllSubscriptionsFromClient(this.cliente.id)
+   .subscribe(subscripciones => {
+      _this.subscripciones = JSON.parse(JSON.stringify(subscripciones));
+      for (let i in _this.subscripciones) {
+        _this.subscripciones[i].billingDate = new Date(_this.subscripciones[i].billingDate).toISOString();
+        _this.subscripciones_clientes.push(_this.subscripciones[i]);
+      }
+   });
+  }
+
+  deleteSubscripcion(subscripcionId) {
+    this.transaccion.deleteSubscription(subscripcionId)
+    .subscribe(result => {
+      // volver a cargar suscripciones y transacciones
+      this.subscripciones_clientes = [];
+      this.transacciones_clientes = [];
+      this.ngOnInit();
+    }, err => {
+      console.log(err);
+    })
   }
 
 }

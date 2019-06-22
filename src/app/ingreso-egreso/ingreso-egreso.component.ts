@@ -25,6 +25,7 @@ export class IngresoEgresoComponent implements OnInit {
 
   private categorias = [];
   private transacciones = [];
+  private subscriptions = [];
 
   constructor(
     private categoriaPredefinida: CategoriapredefinidaAPIService,
@@ -99,23 +100,44 @@ export class IngresoEgresoComponent implements OnInit {
 
   saveTransaccion() {
     this.setTransactionType(this.tipo);
-    let transaccion = {
-      clientId: this.cliente.id,
-      description: this.description,
-      amount: this.amount,
-      categoryName: this.categoria,
-      transactionType: this.tipoTransaccion,
-      timestamp: new Date().toISOString()
+    if (this.tipoTransaccion == 1 || this.tipoTransaccion == 2) {
+      let transaccion = {
+        clientId: this.cliente.id,
+        description: this.description,
+        amount: this.amount,
+        categoryName: this.categoria,
+        transactionType: this.tipoTransaccion,
+        timestamp: new Date().toISOString()
+      }
+      this.transaccion.saveTransaccion(transaccion)
+      .subscribe(transaccion =>  {
+        this.transacciones.push(transaccion);
+        this.description = '';
+        this.amount = 0.00;
+        this.categoria = 0;
+        this.tipo = '';
+        this.saveLocalStorage();
+      })
+    } else {
+      if (this.tipoTransaccion == 3) {
+        let subscription = {
+          clientId: this.cliente.id,
+          description: this.description,
+          amount: this.amount,
+          categoryName: this.categoria,
+          billingDate: new Date().toISOString()
+        }
+        this.transaccion.saveSubscriptionPayment(subscription)
+        .subscribe(subscription => {
+          this.subscriptions.push(subscription);
+          this.description = '';
+          this.amount = 0.00;
+          this.categoria = 0;
+          this.tipo = '';
+          this.saveLocalStorage();
+        })
+      }
     }
-    this.transaccion.saveTransaccion(transaccion)
-    .subscribe(transaccion =>  {
-      this.transacciones.push(transaccion);
-      this.description = '';
-      this.amount = 0.00;
-      this.categoria = 0;
-      this.tipo = '';
-      this.saveLocalStorage();
-    })
   }
 
   saveLocalStorage() {

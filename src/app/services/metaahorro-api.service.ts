@@ -23,7 +23,7 @@ export class MetaahorroAPIService {
   getAhorroPorCliente(clientId) {
     const url_api = this._baseURL + `/savingGoal/client/${clientId}`;
 
-    return this.http.get(url_api);
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
   }
 
   saveAhorro(savingGoal) {

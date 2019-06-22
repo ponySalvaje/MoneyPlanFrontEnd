@@ -12,12 +12,18 @@ export class ConfiguracionComponent implements OnInit {
 
   private ahorro_cantidad = 0;
   private ahorro_descripcion = '';
+  private ahorro_fecha_inicio;
+  private ahorro_fecha_fin;
+
+  private metas = [];
 
   private client;
+  private clientId;
 
   ngOnInit() {
     this.getLocalStorage();
     this.getClient();
+    this.getAhorrosPorCliente();
   }
 
 
@@ -35,12 +41,47 @@ export class ConfiguracionComponent implements OnInit {
       phoneNumber: "956868516"
     }
     this.client = client;
+    this.clientId = client.id
+  }
+
+  getAhorrosPorCliente() {
+    this.metaAhorro.getAhorroPorCliente(this.clientId)
+    .subscribe(result => {
+      this.metas = JSON.parse(JSON.stringify(result));
+      for (let i in this.metas) {
+        this.metas[i].startDate = new Date(this.metas[i].startDate).toISOString();
+        this.metas[i].expirationDate = new Date(this.metas[i].expirationDate).toISOString();
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  saveAhorroMensual() {
+    let ahorro = {
+      amount: this.ahorro_cantidad,
+      description: this.ahorro_descripcion,
+      startDate: new Date(this.ahorro_fecha_inicio).toISOString(),
+      expirationDate: new Date(this.ahorro_fecha_fin).toISOString(),
+      client: this.client
+    }
+    this.metaAhorro.saveAhorro(ahorro)
+    .subscribe(ahorro =>  {
+      this.ngOnInit();
+      this.ahorro_descripcion = '';
+      this.ahorro_cantidad = 0.00;
+      this.ahorro_fecha_inicio = '';
+      this.ahorro_fecha_fin = '';
+      this.saveLocalStorage();
+    })
   }
 
   saveLocalStorage() {
     let ahorro = {
       ahorro_cantidad: this.ahorro_cantidad,
-      ahorro_descripcion: this.ahorro_descripcion
+      ahorro_descripcion: this.ahorro_descripcion,
+      ahorro_fecha_inicio: this.ahorro_fecha_inicio,
+      ahorro_fecha_fin: this.ahorro_fecha_fin
     }
     localStorage.setItem('ahorro', JSON.stringify(ahorro));
   }
@@ -50,6 +91,8 @@ export class ConfiguracionComponent implements OnInit {
     if (localStorageItem) {
       this.ahorro_cantidad = localStorageItem.ahorro_cantidad;
       this.ahorro_descripcion = localStorageItem.ahorro_descripcion;
+      this.ahorro_fecha_inicio = localStorageItem.ahorro_fecha_inicio;
+      this.ahorro_fecha_fin = localStorageItem.ahorro_fecha_fin;
     }
   }
 

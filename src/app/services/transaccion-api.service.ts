@@ -15,7 +15,7 @@ export class TransaccionAPIService {
 
   headers : HttpHeaders = new HttpHeaders({
     "Content-Type": "application/json",
-    "Authorization": "Basic "+localStorage.getItem("currentUser")
+    "Authorization": "Basic "+ localStorage.getItem("currentUser")
   })
   constructor(private http: HttpClient) {
     this._baseURL = AppConstants.baseURL;
@@ -33,4 +33,25 @@ export class TransaccionAPIService {
     return this.http.post(url_api, transaccion, {headers: this.headers, withCredentials: true})
     .pipe(map(data => data));
   }
+
+  saveSubscriptionPayment(subscription) {
+    const url_api = this._baseURL + '/subscriptionPayment/';
+
+    return this.http.post(url_api, subscription, {headers: this.headers, withCredentials: true})
+    .pipe(map(data => data));
+  }
+
+  getAllSubscriptionsFromClient(clientId) {
+    const url_api = this._baseURL + `/subscriptionPayment/client/${clientId}`;
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
+
+  deleteSubscription(subscriptionId) {
+    const url_api = this._baseURL + `/subscriptionPayment/${subscriptionId}`;
+
+    return this.http.delete(url_api, {headers: this.headers, withCredentials: true})
+    .pipe(map(data => data));
+  }
+  
 }

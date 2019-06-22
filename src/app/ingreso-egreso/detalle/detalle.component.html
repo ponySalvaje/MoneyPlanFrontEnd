@@ -10,7 +10,6 @@
                             <th>Descripción</th>
                             <th>Monto</th>
                             <th>Tipo</th>
-                            <th></th>
                         </tr>
                     </thead>
 
@@ -29,3 +28,38 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Detalle de subscripciones</h4>
+    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Monto</th>
+                                <th>Fecha de suscripcion</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            <tr *ngFor="let subscripcion of subscripciones_clientes">
+                                <td>{{subscripcion.description}}</td>
+                                <td>{{subscripcion.amount}}</td>
+                                <td>{{subscripcion.billingDate | date : 'dd-MM-yyyy'}}</td>
+                                <td><button type="button" class="btn btn-warning">Modificar</button></td>
+                        <td><button (click)="deleteSubscripcion(subscripcion.id)" type="button" class="btn btn-danger">Eliminar</button></td>
+                             </tr>
+                        </tbody>
+    
+                    </table>
+    
+    
+                </div>
+            </div>
+        </div>
+    </div>
