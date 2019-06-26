@@ -34,6 +34,18 @@ export class TransaccionAPIService {
     .pipe(map(data => data));
   }
 
+  getExpenses(clientId, year, month) {
+    const url_api = this._baseURL + `/transaction/expenses/${clientId}/${year}/${month}`;
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
+
+  getIncomes(clientId, year, month) {
+    const url_api = this._baseURL + `/transaction/incomes/${clientId}/${year}/${month}`;
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
+
   saveSubscriptionPayment(subscription) {
     const url_api = this._baseURL + '/subscriptionPayment/';
 
