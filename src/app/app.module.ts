@@ -32,6 +32,8 @@ import { RecompensaAPIService } from './services/recompensa-api.service';
 import { TransaccionAPIService } from './services/transaccion-api.service';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,8 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [CategoriapersonalizadaAPIService, CategoriapredefinidaAPIService, ClienteAPIService, 
     MetaahorroAPIService, RecompensaAPIService, TransaccionAPIService],
