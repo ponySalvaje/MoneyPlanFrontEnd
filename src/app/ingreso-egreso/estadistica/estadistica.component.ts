@@ -33,7 +33,8 @@ export class EstadisticaComponent implements OnInit {
     this.transaccion.getExpenses(this.cliente.id, new Date().getFullYear(), new Date().getMonth())
     .subscribe(result => {
       this.egresos = JSON.parse(JSON.stringify(result));
-      this.showPieChart()
+      this.showPie();
+      this.showBar();
     }, err => {
       console.log(err);
     });
@@ -52,7 +53,8 @@ export class EstadisticaComponent implements OnInit {
   }
 
   // Graphs
-  public showGraphs = false;
+  public showPieChart = false;
+  public showBarChart = false;
 
   // Pie
   public pieChartLabels: string[] = ['Ingresos', 'Egresos'];
@@ -63,9 +65,9 @@ export class EstadisticaComponent implements OnInit {
       backgroundColor: ["#5858FA", "#FA5858"] 
     }];
 
-  showPieChart() {
+  showPie() {
     this.pieChartData = [this.ingresos, this.egresos]
-    this.showGraphs = true;
+    this.showPieChart = true;
   }
   // Pie events
   public chartClicked(e: any): void {
@@ -78,13 +80,29 @@ export class EstadisticaComponent implements OnInit {
 
   // Bar
 
-  public barChartData: any[]=[
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [42, 24, 71, 14, 31, 49, 30], label: 'Series C'}
+  showBar() {
+    this.barChartData = [
+      {data: [this.ingresos, this.egresos], label: 'Mes'},
     ];
+    this.showBarChart = true;
+  }
+
+  public barChartOptions = {
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    }
+  }
+
+  public barChartData: any[];
     
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: string[] = ['Ingresos', 'Egresos'];
   
   public barChartType:string = 'bar';
 

@@ -58,4 +58,33 @@ export class CategoriapersonalizadaAPIService {
     return this.http.post(url_api, categoriaPersonalizada, httpOptions)
     .pipe(map(data => data));
   }
+
+  updateCategoriaPersonalizada(categoriaPersonalizada) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + localStorage.getItem('currentUser')
+      })
+    };
+
+    const url_api = this._baseURL + '/customCategory/' + categoriaPersonalizada.id;
+
+    return this.http.put(url_api, categoriaPersonalizada, httpOptions)
+    .pipe(map(data => data));
+  }
+
+  getCategoriaPersonalizadaPorId(categoriaId) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + localStorage.getItem('currentUser')
+      })
+    };
+
+    const url_api = this._baseURL + '/customCategory/' + categoriaId;
+
+    return this.http.get(url_api, httpOptions)
+    .pipe(map(data => data));
+  }
 }

@@ -33,6 +33,7 @@ import { TransaccionAPIService } from './services/transaccion-api.service';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ChartsModule } from 'ng2-charts';
     SidebarComponent,
     CategoriaComponent,
     TwoDigitDecimalNumberDirective,
-    ConfiguracionComponent
+    ConfiguracionComponent,
+    EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,

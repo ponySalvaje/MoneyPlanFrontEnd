@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { log } from 'util';
 import { CategoriapersonalizadaAPIService } from '../services/categoriapersonalizada-api.service';
 
@@ -20,7 +21,7 @@ export class CategoriaComponent implements OnInit {
 
   private categoriasPersonalizadas = [];
 
-  constructor(private categoriaPersonalizada: CategoriapersonalizadaAPIService) { }
+  constructor(private router: Router, private categoriaPersonalizada: CategoriapersonalizadaAPIService) { }
 
   ngOnInit() {
     this.getLocalStorage();
@@ -67,6 +68,12 @@ export class CategoriaComponent implements OnInit {
     }, err => {
       console.log(err);
     })
+  }
+
+  editCategoria(categoriaId) {
+    localStorage.removeItem('customCategoryId');
+    localStorage.setItem('customCategoryId', categoriaId);
+    this.router.navigate(['editar-categoria']);
   }
 
   saveCategoriaPersonalizada() {

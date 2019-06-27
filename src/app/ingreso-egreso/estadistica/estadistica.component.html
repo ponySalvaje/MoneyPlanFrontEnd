@@ -9,7 +9,7 @@
                     </div>
                     <div class="float-right">
                         <p class="mb-0 text-right">Ingresos y Egresos del mes</p>
-                        <div *ngIf="showGraphs" class="fluid-container">
+                        <div *ngIf="showPieChart" class="fluid-container">
                                 <canvas baseChart
                                     [data]="pieChartData"
                                     [labels]="pieChartLabels"
@@ -38,7 +38,7 @@
                     </div>
                     <div class="float-right">
                         <p class="mb-0 text-right">Ingresos y Egresos del mes</p>
-                        <div class="fluid-container">
+                        <div *ngIf="showBarChart" class="fluid-container">
                             <canvas baseChart
                                 [datasets]="barChartData"
                                 [labels]="barChartLabels"
