@@ -27,7 +27,7 @@ export class EstadisticaComponent implements OnInit {
   public pieChartTypeEgresosPorCategoria: string = 'pie';
   public chartColorsEgresosPorCategoria: any[] = [
     { 
-      backgroundColor: ["#5858FA", "#FA5858"] 
+      backgroundColor: ["#5858FA", "#FA5858", "#01DF01", "#A901DB", "#D7DF01", "#3104B4"] 
     }];
 
   // Pie events
@@ -42,12 +42,12 @@ export class EstadisticaComponent implements OnInit {
   getEgresosPorCategoria() {
     this.transaccion.getExpensesByCategory(this.cliente.id, new Date().getFullYear(), new Date().getMonth())
     .subscribe(result => {
-      console.log(result);
+      //console.log(result);
       for (let i in result) {
         if (result[i].amount != 0) {
           this.pieChartLabelsEgresosPorCategoria.push(result[i].categoryName);
           this.pieChartDataEgresosPorCategoria.push(result[i].amount);
-          console.log(this.pieChartDataEgresosPorCategoria);
+          //console.log(this.pieChartDataEgresosPorCategoria);
           this.showPieChartEgresosPorCategoria = true;
         }
       }
@@ -78,6 +78,7 @@ export class EstadisticaComponent implements OnInit {
   }
 
   getCliente() {
+    /*
     let cliente = {
       docId: "71653252",
       docIdType: "DNI",
@@ -87,6 +88,9 @@ export class EstadisticaComponent implements OnInit {
       phoneNumber: "956868516"
     }
     this.cliente = cliente;
+    */
+    this.cliente = JSON.parse(localStorage.getItem('client'));
+    //this.clientId = this.client.id;
   }
 
   // Graphs

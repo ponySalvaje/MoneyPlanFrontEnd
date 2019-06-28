@@ -10,7 +10,7 @@ import {AppConstants} from '../AppConstants';
 export class CategoriapersonalizadaAPIService {
   transaccion: Observable<any>;
 
-  _baseURL : string;
+  _baseURL: string;
 
   constructor(private http: HttpClient) {
     this._baseURL = AppConstants.baseURL;

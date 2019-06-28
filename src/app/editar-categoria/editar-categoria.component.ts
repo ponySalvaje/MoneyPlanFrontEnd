@@ -29,6 +29,7 @@ export class EditarCategoriaComponent implements OnInit {
   }
 
   getClient() {
+    /*
     const client = {
       docId: '71653252',
       docIdType: 'DNI',
@@ -38,6 +39,9 @@ export class EditarCategoriaComponent implements OnInit {
       phoneNumber: '956868516'
     };
     this.client = client;
+    */
+    this.client = JSON.parse(localStorage.getItem('client'));
+    //this.clientId = this.client.id;
   }
 
   getData() {

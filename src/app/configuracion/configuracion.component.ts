@@ -32,6 +32,7 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   getClient() {
+    /*
     let client = {
       docId: "71653252",
       docIdType: "DNI",
@@ -42,6 +43,9 @@ export class ConfiguracionComponent implements OnInit {
     }
     this.client = client;
     this.clientId = client.id
+    */
+    this.client = JSON.parse(localStorage.getItem('client'));
+    this.clientId = this.client.id;
   }
 
   getAhorrosPorCliente() {

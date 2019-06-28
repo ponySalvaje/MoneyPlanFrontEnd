@@ -34,6 +34,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   getClient() {
+    /*
     const client = {
       docId: '71653252',
       docIdType: 'DNI',
@@ -44,7 +45,9 @@ export class CategoriaComponent implements OnInit {
     };
     this.client = client;
     this.clientId = client.id;
-    //this.clientId = localStorage.getItem('clientId');
+    */
+    this.client = JSON.parse(localStorage.getItem('client'));
+    this.clientId = this.client.id;
   }
 
   getCategoriaPersonalizadaPorCliente() {

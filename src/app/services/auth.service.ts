@@ -50,7 +50,7 @@ export class AuthService {
     return this.http.post(url_api, this.body, httpOptions)
     .pipe(map(result => {
       if (result = 'OK') {
-        localStorage.setItem('currentUser', this.key);
+        //localStorage.setItem('currentUser', this.key);
       }
       if (result !== 'OK') {
         localStorage.clear();

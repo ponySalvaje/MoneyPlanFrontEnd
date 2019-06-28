@@ -75,6 +75,7 @@ export class IngresoEgresoComponent implements OnInit {
   }
 
   getCliente() {
+    /*
     let cliente = {
       docId: "71653252",
       docIdType: "DNI",
@@ -84,6 +85,9 @@ export class IngresoEgresoComponent implements OnInit {
       phoneNumber: "956868516"
     }
     this.cliente = cliente;
+    */
+    this.cliente = JSON.parse(localStorage.getItem('client'));
+    //this.clientId = this.client.id;
   }
 
   setTransactionType(tipo) {

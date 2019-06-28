@@ -35,6 +35,15 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.userSec)
     .subscribe(result => {
+      this.clientService.getInfo(this.userSec.username)
+      .subscribe(result => {
+        clientId = result;
+        localStorage.setItem('clientId', clientId);
+        this.clientService.getCliente(clientId)
+        .subscribe(result => {
+          localStorage.setItem('client', JSON.stringify(result));
+        })
+      });
       this.router.navigate(['']);
     }, error => {
       if (error.status == 401) {
@@ -45,12 +54,7 @@ export class LoginComponent implements OnInit {
         });
       }
     });
-    /*
-    this.clientService.getInfo(this.userSec.username)
-    .subscribe(result => {
-      clientId = result;
-      localStorage.setItem('clientId', clientId);
-    });
-    */
+    
+    
   }
 }

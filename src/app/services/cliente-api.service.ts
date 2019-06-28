@@ -14,12 +14,20 @@ export class ClienteAPIService {
     this._baseURL = AppConstants.baseURL;
    }
 
+  private keyAdmin = 'bWFyY2VzZnR3cjJAZ21haWwuY29tOndlbGNvbWUx';
+
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + localStorage.getItem('currentUser')
+    'Authorization': 'Basic bWFyY2VzZnR3cjJAZ21haWwuY29tOndlbGNvbWUx'
   });
+
   getInfo(username) {
     const url_api = this._baseURL + '/client/user/' + btoa(username);
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
+
+  getCliente(clientId) {
+    const url_api = this._baseURL + '/client/' + clientId;
     return this.http.get(url_api, {headers: this.headers, withCredentials: true});
   }
 }
