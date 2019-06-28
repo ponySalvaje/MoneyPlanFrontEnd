@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { ClienteAPIService } from '../../services/cliente-api.service';
 import { TransaccionAPIService } from '../../services/transaccion-api.service';
 
@@ -9,7 +10,7 @@ import { TransaccionAPIService } from '../../services/transaccion-api.service';
 })
 export class DetalleComponent implements OnInit {
 
-  constructor(private transaccion: TransaccionAPIService) { }
+  constructor(private router: Router, private transaccion: TransaccionAPIService) { }
 
   public transacciones_clientes = [];
   private transacciones = {};
@@ -67,6 +68,12 @@ export class DetalleComponent implements OnInit {
         _this.subscripciones_clientes.push(_this.subscripciones[i]);
       }
    });
+  }
+
+  editSubscripcion(subscripcionId) {
+    localStorage.removeItem('subscriptionId');
+    localStorage.setItem('subscriptionId', subscripcionId);
+    this.router.navigate(['editar-subscripcion']);
   }
 
   deleteSubscripcion(subscripcionId) {

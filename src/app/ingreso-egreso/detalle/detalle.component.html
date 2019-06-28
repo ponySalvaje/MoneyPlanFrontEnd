@@ -51,8 +51,8 @@
                                 <td>{{subscripcion.description}}</td>
                                 <td>{{subscripcion.amount}}</td>
                                 <td>{{subscripcion.billingDate | date : 'dd-MM-yyyy'}}</td>
-                                <td><button type="button" class="btn btn-warning">Modificar</button></td>
-                        <td><button (click)="deleteSubscripcion(subscripcion.id)" type="button" class="btn btn-danger">Eliminar</button></td>
+                                <td><button (click)="editSubscripcion(subscripcion.id)" type="button" class="btn btn-warning">Modificar</button></td>
+                                <td><button (click)="deleteSubscripcion(subscripcion.id)" type="button" class="btn btn-danger">Eliminar</button></td>
                              </tr>
                         </tbody>
     

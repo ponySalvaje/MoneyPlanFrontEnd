@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Modificar Subscripción</h4>
+              <form>
+
+                <div class="form-group">
+                  <label>Descripción</label>
+                  <input type="text" maxlength="50" class="form-control" placeholder="Descripción" name="descripcion" id="transaccion-descripcion" [(ngModel)]="description">
+                </div>
+
+                <div class="form-group">
+                  <label>Monto</label>
+                  <input type="number" class="form-control" placeholder="0.00" name="monto" id="transaccion-monto" [(ngModel)]="amount" appTwoDigitDecimalNumber>
+                </div>
+
+                  <div class="form-group">
+                    <label>Categoria</label>
+                    <select type="text" maxlength="50" class="form-control" placeholder="Categoría" name="categoria" id="transaccion-categoria" [(ngModel)]="categoria">
+                        <option *ngFor="let categoria of categorias;" value="{{categoria.name}}">{{ categoria.name }}</option>
+                    </select>
+                  </div>
+                  
+                  <hr>
+                  <button (click)="updateSubscription()" type="button" class="btn btn-warning">
+              <i class="fa fa-save"></i>
+              Modificar
+            </button>
+
+                  <!-- 
+              <button disabled class="btn btn-success mr-2">
+                <i class="fa fa-spin fa-sync"></i>
+                Espere por favor...
+              </button> 
+            -->
+
+                  <button type="reset" class="btn btn-light">Cancelar</button>
+
+              </form>
+              <hr>
+          </div>
+      </div>
+  </div>
+</div>

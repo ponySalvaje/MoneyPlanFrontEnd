@@ -17,6 +17,43 @@ export class EstadisticaComponent implements OnInit {
   ngOnInit() {
     this.getCliente();
     this.getIngresos();
+    this.getEgresosPorCategoria();
+  }
+
+  public pieChartLabelsEgresosPorCategoria = [];
+  public pieChartDataEgresosPorCategoria = [];
+  public showPieChartEgresosPorCategoria = false;
+
+  public pieChartTypeEgresosPorCategoria: string = 'pie';
+  public chartColorsEgresosPorCategoria: any[] = [
+    { 
+      backgroundColor: ["#5858FA", "#FA5858"] 
+    }];
+
+  // Pie events
+  public chartClickedEgresosPorCategoria(e: any): void {
+    console.log(e);
+  }
+ 
+  public chartHoveredEgresosPorCategoria(e: any): void {
+    console.log(e);
+  }
+
+  getEgresosPorCategoria() {
+    this.transaccion.getExpensesByCategory(this.cliente.id, new Date().getFullYear(), new Date().getMonth())
+    .subscribe(result => {
+      console.log(result);
+      for (let i in result) {
+        if (result[i].amount != 0) {
+          this.pieChartLabelsEgresosPorCategoria.push(result[i].categoryName);
+          this.pieChartDataEgresosPorCategoria.push(result[i].amount);
+          console.log(this.pieChartDataEgresosPorCategoria);
+          this.showPieChartEgresosPorCategoria = true;
+        }
+      }
+    }, err => {
+      console.log(err);
+    })
   }
 
   getIngresos() {

@@ -34,6 +34,7 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
 
 import { ChartsModule } from 'ng2-charts';
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
+import { EditarSubscripcionComponent } from './editar-subscripcion/editar-subscripcion.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.co
     CategoriaComponent,
     TwoDigitDecimalNumberDirective,
     ConfiguracionComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    EditarSubscripcionComponent
   ],
   imports: [
     BrowserModule,

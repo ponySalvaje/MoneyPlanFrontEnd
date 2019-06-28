@@ -55,4 +55,33 @@
             </div>
         </div>
     </div>
+
+    <div style="padding-top: 30px;" class="col-6">
+        <div class="card card-statistics">
+            <div class="card-body">
+
+                <div class="clearfix">
+                    <div class="float-left">
+                        <i class="fas fa-chart-line" style="font-size:48px;color:#01DF01"></i>
+                    </div>
+                    <div class="float-right">
+                        <p class="mb-0 text-right">Egresos por Categoría</p>
+                        <div *ngIf="showPieChartEgresosPorCategoria" class="fluid-container">
+                                <canvas baseChart
+                                    [data]="pieChartDataEgresosPorCategoria"
+                                    [labels]="pieChartLabelsEgresosPorCategoria"
+                                    [chartType]="pieChartTypeEgresosPorCategoria"
+                                    [colors]="chartColorsEgresosPorCategoria"
+                                    (chartHover)="chartHoveredEgresosPorCategoria($event)"
+                                    (chartClick)="chartClickedEgresosPorCategoria($event)">
+                                </canvas>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-muted mt-3 mb-0">
+                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Balance del mes
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

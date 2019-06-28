@@ -18,8 +18,6 @@ export class IngresoEgresoComponent implements OnInit {
   private tipo = '';
   private tipoTransaccion = -1;
 
-  private categoriaObject = {};
-
   private categoriasPredefinidas = {};
   private categoriasPersonalizadas = {};
 

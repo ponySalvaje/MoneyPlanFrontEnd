@@ -65,5 +65,24 @@ export class TransaccionAPIService {
     return this.http.delete(url_api, {headers: this.headers, withCredentials: true})
     .pipe(map(data => data));
   }
+
+  getSubscriptionById(subscriptionId) {
+    const url_api = this._baseURL + `/subscriptionPayment/${subscriptionId}`;
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
+
+  updateSubscriptionPayment(subscription) {
+    const url_api = this._baseURL + `/subscriptionPayment/${subscription.id}`;
+
+    return this.http.put(url_api, subscription, {headers: this.headers, withCredentials: true})
+    .pipe(map(data => data));
+  }
+
+  getExpensesByCategory(clientId, year, month) {
+    const url_api = this._baseURL + `/transaction/resumen/gasto/categoria/${clientId}/${year}/${month}/`;
+
+    return this.http.get(url_api, {headers: this.headers, withCredentials: true});
+  }
   
 }
